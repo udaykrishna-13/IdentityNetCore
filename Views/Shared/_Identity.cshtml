@@ -1,0 +1,26 @@
+﻿@{
+    var loggedIn = User.Identity.IsAuthenticated;
+}
+
+@if (loggedIn)
+{
+
+    @Html.ValidationSummary()
+    <li>
+        <label>Hello @User.Identity.Name (@User.Claims.FirstOrDefault(c => c.Type == "Department"))</label>
+    </li>
+    <li class="nav-item my-2 my-lg-0">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Identity" asp-action="MFASetup">MFA Setup</a>
+    </li>
+    <li class="nav-item my-2 my-lg-0">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Identity" asp-action="SignOut">SignOut</a>
+    </li>
+}
+else
+{
+
+    <li class="nav-item my-2 my-lg-0">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Identity" asp-action="SignUp">SignUp</a>
+    </li>
+    
+}

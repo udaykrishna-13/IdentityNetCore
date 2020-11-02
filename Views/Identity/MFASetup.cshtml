@@ -1,0 +1,30 @@
+﻿@model MFASetupViewModel
+@{
+    ViewData["Title"] = "MFA Setup";
+}
+@Html.ValidationSummary()
+<h1>MFASetup</h1>
+
+<p class="border-secondary"> Please enter code below in your authenticator application</p>
+
+<p> @Model.Token</p>
+
+
+
+<form asp-controller="Identity" asp-action="MFASetup" method="post">
+    <input type="hidden" asp-for="Token" />
+    Enter : <input class="form-control" type="text" asp-for="Code" />
+    <br />
+
+    <button class="btn btn-primary">Submit</button>
+</form>
+<p> Alternative you can scan beloq QR Code</p>
+
+<div id="qrcode"></div>
+@section Scripts
+{
+    <script src="~/js/qrcode.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        new QRCode(document.getElementById("qrcode"), "@Model.QrCodeUrl");
+    </script>
+}
